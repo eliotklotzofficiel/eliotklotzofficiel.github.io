@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliot Klotz — Percussionniste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: #8B6E2E;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --dark3: #252525;
+    --text: #D4C9A8;
+    --text-muted: #7A6E56;
+    --white: #F5EED8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+    transition: background 0.3s;
+  }
+
+  nav.scrolled {
+    background: rgba(10,10,10,0.97);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 60%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+      linear-gradient(180deg, #0A0A0A 0%, #111008 50%, #0A0A0A 100%);
+  }
+
+  .hero-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+  }
+
+  .hero-rings circle {
+    fill: none;
+    stroke: rgba(201,168,76,0.07);
+    animation: pulse-ring 4s ease-in-out infinite;
+  }
+
+  .hero-rings circle:nth-child(2) { animation-delay: 1s; }
+  .hero-rings circle:nth-child(3) { animation-delay: 2s; }
+
+  @keyframes pulse-ring {
+    0%, 100% { stroke-opacity: 0.07; r: inherit; }
+    50% { stroke-opacity: 0.12; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fade-up 1.4s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @keyframes fade-up {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+    font-weight: 300;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 0 auto 2rem;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .hero-cta:hover {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--gold);
+    letter-spacing: 0.4em;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.4;
+    animation: fade-up 2s 1s ease forwards, bob 2s 2s ease-in-out infinite;
+  }
+
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  .scroll-indicator span {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  /* SECTIONS COMMON */
+  section { padding: 7rem 0; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 2rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about::after {
+    content: '';
+    position: absolute;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about-text p strong {
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+
+  .about-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .stat-item {
+    border-left: 2px solid rgba(201,168,76,0.3);
+    padding-left: 1.5rem;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  /* INSTRUMENTS */
+  .instruments {
+    background: var(--black);
+    position: relative;
+  }
+
+  .instruments-intro {
+    max-width: 650px;
+    margin-bottom: 4rem;
+  }
+
+  .instruments-intro p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .instruments-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .instrument-card {
+    background: var(--black);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .instrument-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .instrument-card:hover { background: var(--dark2); }
+  .instrument-card:hover::before { transform: scaleX(1); }
+
+  .instrument-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+    filter: sepia(100%) saturate(200%) brightness(90%) hue-rotate(10deg);
+  }
+
+  .instrument-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  .instrument-desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  /* BLOG */
+  .blog {
+    background: var(--dark);
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .blog-card {
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 2.5rem;
+    transition: border-color 0.3s, background 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blog-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .blog-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.03);
+  }
+
+  .blog-card:hover::after { opacity: 1; }
+
+  .blog-card.featured {
+    grid-column: 1 / -1;
+    background: rgba(201,168,76,0.03);
+    border-color: rgba(201,168,76,0.2);
+  }
+
+  .blog-date {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    margin-bottom: 1rem;
+  }
+
+  .blog-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+
+  .blog-card.featured .blog-card-title { font-size: 2.2rem; }
+
+  .blog-excerpt {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* CONCERTS */
+  .concerts {
+    background: var(--black);
+    position: relative;
+  }
+
+  .concerts::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+  }
+
+  .concerts-list {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .concert-item {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    transition: background 0.3s;
+    position: relative;
+  }
+
+  .concert-item:hover {
+    background: linear-gradient(to right, rgba(201,168,76,0.04), transparent);
+    padding-left: 1rem;
+    margin-left: -1rem;
+  }
+
+  .concert-date-block {
+    text-align: center;
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.8rem;
+    background: rgba(201,168,76,0.03);
+  }
+
+  .concert-day {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .concert-month {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  .concert-info { flex: 1; }
+
+  .concert-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+
+  .concert-venue {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .concert-venue strong {
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .concert-badge {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+
+  .concert-badge.upcoming {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .concert-badge.sold-out {
+    color: var(--text-muted);
+    border-color: rgba(122,110,86,0.3);
+  }
+
+  .concert-badge.few-left {
+    color: #C97050;
+    border-color: rgba(201,112,80,0.4);
+    background: rgba(201,112,80,0.06);
+  }
+
+  /* CONTACT / FOOTER */
+  .contact {
+    background: var(--dark);
+    text-align: center;
+    padding: 7rem 0 4rem;
+  }
+
+  .contact-email {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-style: italic;
+    color: var(--gold-light);
+    text-decoration: none;
+    display: block;
+    margin: 2rem 0;
+    transition: color 0.3s;
+  }
+
+  .contact-email:hover { color: var(--white); }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .social-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .social-link:hover { color: var(--gold); }
+
+  footer {
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--black);
+  }
+
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+  }
+
+  .footer-copy {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* GOLD SEPARATOR */
+  .gold-sep {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+    margin: 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .instruments-grid { grid-template-columns: 1fr; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .blog-card.featured { grid-column: 1; }
+    .concert-item { grid-template-columns: 90px 1fr; }
+    .concert-badge { display: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">E·K</a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#instruments">Instruments</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#concerts">Concerts</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-rings" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="300" cy="300" r="120" stroke-width="1"/>
+    <circle cx="300" cy="300" r="200" stroke-width="0.5"/>
+    <circle cx="300" cy="300" r="280" stroke-width="0.5"/>
+  </svg>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Percussionniste · Conservatoire de Strasbourg · Alsace</p>
+    <h1 class="hero-title">Eliot<br><em>Klotz</em></h1>
+    <p class="hero-subtitle">Chaque coup de baguette est une phrase que je n'aurais pas su écrire autrement</p>
+    <div class="hero-divider"></div>
+    <a href="#concerts" class="hero-cta">Prochains concerts</a>
+  </div>
+  <div class="scroll-indicator">
+    <span>Découvrir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">À propos</div>
+        <h2 class="section-title">Une vie construite<br>autour du <em>rythme</em></h2>
+        <p>Tout a commencé très tôt — mes parents avaient compris avant moi que taper sur tout ce qui traînait n'était pas une lubie, mais une vocation. Après <strong>11 ans de musique</strong> dont 5 ans de batterie, j'ai découvert l'univers bien plus vaste des percussions dans toute leur diversité : des claviers mélodiques aux timbales d'orchestre, de la caisse claire aux petites percussions de scène.</p>
+        <p>Six mois avant d'entrer au Conservatoire de Strasbourg, tout s'est accéléré. J'ai décidé de <strong>prendre la musique vraiment au sérieux</strong>, de travailler avec une intensité nouvelle. Aujourd'hui, j'entame ma troisième année au Conservatoire, en 2ème cycle 4ème année — un niveau avancé qui correspond à une pratique experte en formation classique. En fin d'année, je passe les examens pour intégrer le <strong>COA (3ème cycle)</strong>, le niveau le plus élevé du cursus.</p>
+        <p>Ce qui me fait vibrer par-dessus tout : <strong>jouer en orchestre</strong>. Ce dialogue entre les pupitres, cette façon d'occuper l'espace sonore collectif, de tenir le temps pour tout un ensemble — c'est là que je me sens le plus vivant. Et j'ai des projets plein la tête pour continuer à créer et collaborer.</p>
+      </div>
+      <div class="about-visual">
+        <div class="stat-item">
+          <div class="stat-number">11</div>
+          <div class="stat-label">Années de musique</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Années de scène</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2e</div>
+          <div class="stat-label">Cycle · Conservatoire de Strasbourg</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">COA</div>
+          <div class="stat-label">Objectif 3ème cycle · Examen fin 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- INSTRUMENTS -->
+<section class="instruments" id="instruments">
+  <div class="container">
+    <div class="section-label">Instruments</div>
+    <h2 class="section-title">Un percussionniste,<br><em>plusieurs univers</em></h2>
+    <div class="instruments-intro">
+      <p>Les percussions couvrent un spectre immense — du mélodique au rythmique, du délicat au puissant. Chaque famille d'instruments est une façon différente d'habiter le son et de dialoguer avec les autres musiciens.</p>
+    </div>
+    <div class="instruments-grid">
+      <div class="instrument-card">
+        <span class="instrument-icon">🎹</span>
+        <div class="instrument-name">Claviers Percussions</div>
+        <p class="instrument-desc">Marimba, xylophone, vibraphone, glockenspiel — les claviers sont mon terrain de jeu de prédilection. Ils réunissent la précision mélodique et la gestuelle percussive dans un même instrument.</p>
+      </div>
+      <div class="instrument-card">
+        <span class="instrument-icon">🥁</span>
+        <div class="instrument-name">Batterie</div>
+        <p class="instrument-desc">Mon point de départ. Cinq années à construire ma technique, mon groove, ma façon d'écouter les autres. La batterie m'a appris ce qu'est vraiment tenir un rythme pour un groupe entier.</p>
+      </div>
+      <div class="instrument-card">
+        <span class="instrument-icon">🎶</span>
+        <div class="instrument-name">Caisse Claire</div>
+        <p class="instrument-desc">L'instrument de l'exigence et de la précision. En orchestre, la caisse claire est souveraine — chaque coup compte, chaque nuance doit être juste. Un instrument qui demande une vie entière.</p>
+      </div>
+      <div class="instrument-card">
+        <span class="instrument-icon">🪘</span>
+        <div class="instrument-name">Timbales (Timpani)</div>
+        <p class="instrument-desc">Les géants de l'orchestre. Les timbales imposent leur présence dans les grandes formations symphoniques — accords, roulements, changements de hauteur en direct. Un instrument à part entière.</p>
+      </div>
+      <div class="instrument-card">
+        <span class="instrument-icon">✨</span>
+        <div class="instrument-name">Petites Percussions d'Orchestre</div>
+        <p class="instrument-desc">Triangle, cymbales, tambourin, wood-blocks, castagnettes… Ces instruments discrets font toute la couleur d'un orchestre. Les ignorer serait une erreur ; les maîtriser, un art.</p>
+      </div>
+      <div class="instrument-card">
+        <span class="instrument-icon">🎵</span>
+        <div class="instrument-name">Orchestre & Ensemble</div>
+        <p class="instrument-desc">Ma passion absolue. Jouer au sein d'un orchestre — sentir le souffle collectif, tenir le temps pour tout un pupitre, dialoguer avec les cordes et les vents — c'est ce qui me rend le plus heureux.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="container">
+    <div class="section-label">Blog</div>
+    <h2 class="section-title">Ce qui me fait<br><em>avancer</em></h2>
+    <div class="blog-grid">
+
+      <div class="blog-card featured">
+        <div class="blog-date">Avril 2026</div>
+        <h3 class="blog-card-title">La percussion me rend heureux — et je veux en faire quelque chose de grand</h3>
+        <p class="blog-excerpt">Il y a des choses qu'on sait très tôt et qu'on met du temps à formuler clairement. Pour moi, la percussion n'est pas un métier que j'ai choisi — c'est une évidence qui s'est imposée. Aujourd'hui, ce qui me motive profondément, c'est de bâtir des projets ambitieux avec des gens passionnés, de créer des rencontres musicales qui n'auraient pas eu lieu autrement. L'orchestre de Gambsheim en est un exemple : jouer ensemble, pour de vrai, avec une exigence commune.</p>
+        <span class="blog-tag">Parcours</span>
+        <span class="blog-tag" style="margin-left:0.5rem;">Projets</span>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-date">Mars 2026</div>
+        <h3 class="blog-card-title">Du COA comme horizon : pourquoi le 3ème cycle me tient à cœur</h3>
+        <p class="blog-excerpt">Passer le COA en fin d'année, ce n'est pas juste un examen de plus. C'est une étape qui valide un engagement total envers la musique — et ouvre des portes vers des formations professionnelles, des projets plus exigeants, une vie musicale plus intense.</p>
+        <span class="blog-tag">Conservatoire</span>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-date">Février 2026</div>
+        <h3 class="blog-card-title">Jouer en orchestre : ce que ça m'apprend sur moi-même</h3>
+        <p class="blog-excerpt">En orchestre, on ne peut pas tricher. On ne peut pas se cacher derrière la virtuosité solo. Il faut écouter, s'effacer parfois, être là au bon moment. C'est l'école de l'humilité musicale — et j'en suis amoureux.</p>
+        <span class="blog-tag">Orchestre</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- CONCERTS -->
+<section class="concerts" id="concerts">
+  <div class="container">
+    <div class="section-label">Concerts & Événements</div>
+    <h2 class="section-title">Prochaines <em>dates</em></h2>
+    <div class="concerts-list">
+
+      <div class="concert-item">
+        <div class="concert-date-block">
+          <div class="concert-day">07</div>
+          <div class="concert-month">Mai 2026</div>
+        </div>
+        <div class="concert-info">
+          <div class="concert-title">Audition des Classes Percussions</div>
+          <div class="concert-venue"><strong>Conservatoire de Strasbourg</strong> — Strasbourg, Alsace</div>
+          <div class="concert-venue" style="margin-top:0.3rem;">Audition publique · En soirée</div>
+        </div>
+        <span class="concert-badge upcoming">Entrée libre</span>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date-block">
+          <div class="concert-day">23–24</div>
+          <div class="concert-month">Mai 2026</div>
+        </div>
+        <div class="concert-info">
+          <div class="concert-title">Concert de l'Orchestre de Gambsheim</div>
+          <div class="concert-venue"><strong>Thônes, dans les Alpes</strong></div>
+          <div class="concert-venue" style="margin-top:0.3rem;">Deux dates · Programme symphonique</div>
+        </div>
+        <span class="concert-badge upcoming">Billetterie</span>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date-block">
+          <div class="concert-day">30–31</div>
+          <div class="concert-month">Mai 2026</div>
+        </div>
+        <div class="concert-info">
+          <div class="concert-title">Concert de Printemps — Orchestre de Gambsheim</div>
+          <div class="concert-venue"><strong>Gambsheim, Bas-Rhin</strong> — Alsace</div>
+          <div class="concert-venue" style="margin-top:0.3rem;">Soir du 30 · Après-midi du 31</div>
+        </div>
+        <span class="concert-badge upcoming">Billetterie</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-label" style="justify-content:center;">Contact</div>
+    <h2 class="section-title" style="text-align:center;">Travaillons <em>ensemble</em></h2>
+    <p style="color:var(--text-muted); max-width:500px; margin:0 auto; line-height:1.8; font-size:1rem;">
+      Pour des concerts, collaborations, projets musicaux ou toute demande — n'hésite pas à me contacter directement.
+    </p>
+    <a href="mailto:eliot.percussions.sup@gmail.com" class="contact-email">eliot.percussions.sup@gmail.com</a>
+    <div class="social-links">
+      <a href="https://www.instagram.com/eliotklotzofficiel/" class="social-link" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@EliotKlotzOfficiel" class="social-link" target="_blank">YouTube</a>
+      <a href="https://www.facebook.com/profile.php?id=61565067290188" class="social-link" target="_blank">Facebook</a>
+      <a href="https://www.threads.com/@eliotklotzofficiel" class="social-link" target="_blank">Threads</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Eliot Klotz</div>
+  <div class="footer-copy">© 2026 · Eliot Klotz · Tous droits réservés</div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+</script>
+
+</body>
+</html>
