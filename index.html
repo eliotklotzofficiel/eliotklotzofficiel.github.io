@@ -742,6 +742,16 @@
       </div>
       <div class="about-visual">
         <div class="stat-item">
+           <!-- PHOTO PROFIL -->
+  <img src="PP Réseaux Percu.jpg" alt="Photo Eliot Klotz" style="
+    width: 100%;
+    max-width: 260px;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+  ">
+        </div>
+        <div class="stat-item">
           <div class="stat-number">11</div>
           <div class="stat-label">Années de musique</div>
         </div>
@@ -763,6 +773,36 @@
 </section>
 
 <div class="gold-sep"></div>
+
+<div class="gold-sep"></div>
+
+<section class="video" id="video">
+  <div class="container">
+    <div class="section-label">Vidéo</div>
+    <h2 class="section-title">En <em>performance</em></h2>
+
+    <!-- THUMBNAIL CLIQUABLE -->
+    <div onclick="this.style.display='none'; this.nextElementSibling.style.display='block'" style="cursor:pointer;">
+      <img 
+        src="https://img.youtube.com/vi/Oi4lUIXgNQc/maxresdefault.jpg"
+        alt="Vidéo Eliot Klotz"
+        style="width:100%; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.4);"
+      >
+    </div>
+
+    <!-- VIDEO (cachée au début) -->
+    <div style="display:none; position:relative; padding-bottom:56.25%; height:0; margin-top:1rem;">
+      <iframe 
+        src="https://www.youtube.com/embed/Oi4lUIXgNQc?autoplay=1"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:12px;">
+      </iframe>
+    </div>
+
+  </div>
+</section>
 
 <!-- INSTRUMENTS -->
 <section class="instruments" id="instruments">
@@ -913,7 +953,7 @@
 
 <footer>
   <div class="footer-logo">Eliot Klotz</div>
-  <div class="footer-copy">© 2026 · Eliot Klotz · Tous droits réservés</div>
+  <div class="footer-copy">© 2026 · Eliot Klotz</div>
 </footer>
 
 <script>
