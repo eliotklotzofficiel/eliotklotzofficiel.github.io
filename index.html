@@ -663,8 +663,9 @@
   .social-links {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin: 2rem 0;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    margin: 2rem 1rem;
   }
 
   .social-link {
@@ -674,6 +675,8 @@
     color: var(--text-muted);
     text-decoration: none;
     transition: color 0.3s;
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.5rem 1rem;
   }
 
   .social-link:hover { color: var(--gold); }
@@ -922,7 +925,6 @@
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .reviews-grid { grid-template-columns: 1fr; }
-  }
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -984,17 +986,7 @@
         <p>Ce que j'aime par-dessus tout : <strong>jouer en orchestre</strong>. Tenir le temps pour un ensemble, dialoguer avec les autres pupitres — c'est là que je suis le mieux. Je joue en orchestre depuis 6 ans, et depuis septembre 2024 je fais partie de la <strong>Musique Harmonie de Gambsheim</strong>. La percussion, c'est mon hobby sérieux — pas ma carrière, mais quelque chose qui compte vraiment.</p>
       </div>
       <div class="about-visual">
-        <div class="stat-item">
-           <!-- PHOTO PROFIL -->
-  <img src="https://raw.githubusercontent.com/eliotklotzofficiel/eliotklotzofficiel.github.io/main/PP%20R%C3%A9seaux%20Percu.jpg" alt="Photo Eliot Klotz" style="
-    width: 100%;
-    max-width: 260px;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-  ">
-</div>
-      <div class="about-visual">
+        <img src="https://raw.githubusercontent.com/eliotklotzofficiel/eliotklotzofficiel.github.io/main/PP%20R%C3%A9seaux%20Percu.jpg" alt="Photo Eliot Klotz" style="width:100%; max-width:220px; border-radius:10px; margin-bottom:1.5rem; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
         <div class="stat-item">
           <div class="stat-number">11</div>
           <div class="stat-label">Années de musique</div>
