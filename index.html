@@ -634,6 +634,12 @@
     border-color: rgba(122,110,86,0.3);
   }
 
+  .concert-badge.private {
+    color: var(--text-muted);
+    border-color: rgba(122,110,86,0.3);
+    background: rgba(122,110,86,0.05);
+  }
+
   .concert-badge.few-left {
     color: #C97050;
     border-color: rgba(201,112,80,0.4);
@@ -1111,9 +1117,17 @@
     <h2 class="section-title">Concerts <em>à venir</em></h2>
     <div class="concerts-list">
 
-      <p style="margin-top:3rem; color:var(--text-muted); font-style:italic; font-size:0.95rem; text-align:center; opacity:0.7;">
-        Aucun concert prévu pour l'instant, revenez bientôt.
-      </p>
+      <div class="concert-item">
+        <div class="concert-date-block">
+          <div class="concert-day">1er</div>
+          <div class="concert-month">Août</div>
+        </div>
+        <div class="concert-info">
+          <div class="concert-title">Mariage &mdash; Batterie</div>
+          <div class="concert-venue">Avec l'<strong>Harmonie Municipale de Weyersheim</strong></div>
+        </div>
+        <div class="concert-badge private">Privé</div>
+      </div>
 
     </div>
   </div>
