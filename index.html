@@ -704,12 +704,27 @@
 
   .concert-info { flex: 1; }
 
+  .concert-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .concert-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    flex-shrink: 0;
+  }
+
   .concert-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
     font-weight: 400;
     color: var(--white);
-    margin-bottom: 0.4rem;
   }
 
   .concert-venue {
@@ -1267,10 +1282,42 @@
           <div class="concert-month">Septembre</div>
         </div>
         <div class="concert-info">
-          <div class="concert-title">Mariage &mdash; Batterie</div>
+          <div class="concert-title-row">
+            <div class="concert-title">Mariage &mdash; Batterie</div>
+          </div>
           <div class="concert-venue">Avec l'<strong>Harmonie Municipale de Weyersheim</strong></div>
         </div>
         <div class="concert-badge private">Privé</div>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date-block">
+          <div class="concert-day">28</div>
+          <div class="concert-month">Novembre</div>
+        </div>
+        <div class="concert-info">
+          <div class="concert-title-row">
+            <img src="https://raw.githubusercontent.com/eliotklotzofficiel/eliotklotzofficiel.github.io/main/logo.jpg" alt="Logo Musique Harmonie Gambsheim" class="concert-logo">
+            <div class="concert-title">Concert d'automne</div>
+          </div>
+          <div class="concert-venue">Avec la <strong>Musique Harmonie de Gambsheim</strong></div>
+        </div>
+        <div class="concert-badge upcoming">À venir</div>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date-block">
+          <div class="concert-day">29</div>
+          <div class="concert-month">Novembre</div>
+        </div>
+        <div class="concert-info">
+          <div class="concert-title-row">
+            <img src="https://raw.githubusercontent.com/eliotklotzofficiel/eliotklotzofficiel.github.io/main/logo.jpg" alt="Logo Musique Harmonie Gambsheim" class="concert-logo">
+            <div class="concert-title">Concert d'automne</div>
+          </div>
+          <div class="concert-venue">Avec la <strong>Musique Harmonie de Gambsheim</strong></div>
+        </div>
+        <div class="concert-badge upcoming">À venir</div>
       </div>
 
     </div>
